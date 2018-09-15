@@ -1,12 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default class App extends React.Component {
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoaded: false
+    };
+  }
+
   render() {
+    const { isLoaded } = this.state;
     return (
       <View style={styles.container}>
-        <View style={styles.redView} />
-        <View style={styles.yellowView} />
+        {isLoaded ? null : (
+          <View style={styles.loading}>
+            <Text style={styles.loadingText}>Getting the AWESOME weather</Text>
+          </View>
+        )}{" "}
       </View>
     );
   }
@@ -17,12 +29,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff"
   },
-  redView: {
+  //RN 에서는 padding: "30 30 30 30" 이런 shorthand 형태로 작성할 수 없다.
+  loading: {
     flex: 1,
-    backgroundColor: "red"
+    backgroundColor: "#FDF6AA",
+    justifyContent: "flex-end",
+    paddingLeft: 25
   },
-  yellowView: {
-    flex: 1,
-    backgroundColor: "yellow"
+  loadingText: {
+    fontSize: 30,
+    marginBottom: 100
   }
 });
