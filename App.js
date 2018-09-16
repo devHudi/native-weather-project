@@ -2,17 +2,51 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import Weather from "./Weather";
 
+const API_KEY = "2a6bca565291bfe3a45b112fa674f339";
+
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoaded: true
+      isLoaded: false,
+      error: null,
+      temperature: null,
+      name: null
     };
   }
 
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({
+          isLoaded: true
+        });
+        this._getWeather(position.coords.latitude, position.coords.longitude);
+      },
+      error => {
+        this.setState({
+          error
+        });
+      }
+    );
+  }
+
+  _getWeather = (lat, lon) => {
+    fetch(
+      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}`
+    )
+      .then(response => response.json())
+      .then(json => {
+        this.setState({
+          temperature: json.main.temp,
+          name: json.weather[0].main
+        });
+      });
+  };
+
   render() {
-    const { isLoaded } = this.state;
+    const { isLoaded, error } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar hidden={true} />
@@ -21,8 +55,9 @@ export default class App extends Component {
         ) : (
           <View style={styles.loading}>
             <Text style={styles.loadingText}>Getting the AWESOME weather</Text>
+            {error ? <Text style={styles.errorText}> {error} </Text> : null}
           </View>
-        )}{" "}
+        )}
       </View>
     );
   }
@@ -42,6 +77,10 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     fontSize: 30,
-    marginBottom: 100
+    marginBottom: 24
+  },
+  errorText: {
+    color: "red",
+    marginBottom: 40
   }
 });
