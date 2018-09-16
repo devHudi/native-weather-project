@@ -8,7 +8,7 @@ const weatherCases = {
   Rain: {
     colors: ["#00C6FB", "#005BEA"],
     title: "짜증나게 비가 오네요",
-    subtitle: "더 많은 정보를 알고싶으면 창 밖을 보세요",
+    subtitle: "밖에 비 온다 주륵주륵주륵",
     icon: "weather-rainy"
   },
   Clear: {
@@ -26,7 +26,7 @@ const weatherCases = {
   Clouds: {
     colors: ["#D7D2CC", "#304352"],
     title: "구름꼈네",
-    subtitle: "더럽게 지루하죠?",
+    subtitle: "더럽게 지루하죠? 저도 그래요...",
     icon: "weather-cloudy"
   },
   Snow: {
@@ -38,7 +38,7 @@ const weatherCases = {
   Drizzle: {
     colors: ["#89F7FE", "#66A6FF"],
     title: "이슬비가 옵니다",
-    subtitle: "근데 이슬비가 뭐지?",
+    subtitle: "올거면 오고 안올거면 오지말지 그쵸?",
     icon: "weather-hail"
   },
   Haze: {
@@ -50,7 +50,7 @@ const weatherCases = {
   Mist: {
     colors: ["#D7D2CC", "#304352"],
     title: "Mist",
-    subtitle: "너가 안경 안낄때랑 비슷하네요",
+    subtitle: "너가 안경 벗었을때랑 비슷하네요",
     icon: "weather-fog"
   }
 };
@@ -102,18 +102,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "flex-start",
     justifyContent: "flex-end",
-    paddingLeft: 25
+    paddingLeft: 25,
+    paddingRight: 25
   },
   title: {
     fontSize: 38,
     color: "white",
     marginBottom: 10,
-    fontWeight: "300"
+    fontWeight: "800"
   },
   subtitle: {
-    fontSize: 24,
+    fontSize: 25,
     color: "white",
-    marginBottom: 24
+    marginBottom: 30
   }
 });
 
